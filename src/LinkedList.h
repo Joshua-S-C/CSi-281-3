@@ -56,12 +56,12 @@ namespace csi281 {
         // Return -1 if it is not found
         int find(const T &item) {
             // I like this :D
-            // current issue it seems that count is not being updated after the remove 50 in tests cuz index goes to 104 while count is 103; but maybe that could just be a counting thing with the for loop
-
+            
             // Something must be wrong with the delete functions cuz the tail function has garbage in it
             int index = 0;
-            for (Node* current = head; current->next != nullptr /*index < count - 1*/; current = current->next, index++) {
-                if (current->data == item) return index;
+            for (Node* current = head; current->next != nullptr /*index < count - 1*/; current = current->next) {
+                if (current->data == item) { return index; }
+                index++;
             }
             return -1;
             
@@ -97,8 +97,7 @@ namespace csi281 {
         // Insert at the end of the collection
         void insertAtEnd(const T &item) {
             Node* newNode = new Node(item);
-            newNode->next = nullptr;
-            
+
             // If linked list is empty
             if (count == 0) {
                 head = newNode;
@@ -107,32 +106,17 @@ namespace csi281 {
                 return;
             }
 
+            tail->next = newNode;
+            tail = newNode;
+            count++;
+            return;
+           
             // If it's the only Node
-            if (head == nullptr) {
+            /*if (head == nullptr) {
                 head = newNode;
                 count++;
                 return;
-            }
-
-            // If neither empty nor alone
-            /*Node* cursor;
-            for (cursor = head; cursor->next != nullptr; cursor = cursor->next);
-            cursor->next = newNode;
-            tail = newNode;*/
-
-
-            /*tail->next = newNode;
-            Node* cursor = tail;
-            cursor->next = new Node(item);
-            tail = cursor->next;
-            tail->next = nullptr;*/
-
-            //Node* newNode = new Node(item); 
-            Node* lastNode = tail;
-            tail = newNode;
-            lastNode->next = tail;
-
-            count++;
+            }*/
         }
         
         // Insert at a specific index
@@ -176,10 +160,8 @@ namespace csi281 {
             assert(count > 0);
             
             Node* current = head;
-            for (int index = 0; index < count - 1; current = current->next, index++); // Go to second to last item
-            delete tail;
-            tail = current;
-            tail->next = nullptr;
+            for (int index = 0; index < count; current = current->next, index++); // Go to second to last item
+            delete current; // This line cost me 3 hours :P
             count--;
         }
         
