@@ -69,7 +69,7 @@ TEST_CASE( "Linked List", "[LL]" ) {
         CHECK( ll.get(0) == 4 );
         CHECK( ll.contains(50) == true );   
         ll.remove(50);
-        CHECK( ll.contains(50) == false );  // Breaking here because find goes past where it should be
+        CHECK( ll.contains(50) == false );
         CHECK( ll.getCount() == 103 );
         ll.insertAtBeginning(1023);
         ll.insertAtBeginning(4324);

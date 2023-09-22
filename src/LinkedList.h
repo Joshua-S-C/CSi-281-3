@@ -56,10 +56,8 @@ namespace csi281 {
         // Return -1 if it is not found
         int find(const T &item) {
             // I like this :D
-            
-            // Something must be wrong with the delete functions cuz the tail function has garbage in it
             int index = 0;
-            for (Node* current = head; current->next != nullptr /*index < count - 1*/; current = current->next) {
+            for (Node* current = head; current->next != nullptr; current = current->next) {
                 if (current->data == item) { return index; }
                 index++;
             }
@@ -77,10 +75,9 @@ namespace csi281 {
         
         // Get the item at a particular index
         T &get(int index) {
-            assert(index < count); // can't insert off end
-            assert(index >= 0); // no negative indices
+            assert(index < count);  // can't insert off end
+            assert(index >= 0);     // no negative indices
 
-            // 
             Node* current = head;
             for (int i = 0; i < index; i++) current = current->next;
             return current->data;
@@ -88,7 +85,7 @@ namespace csi281 {
         
         // Insert at the beginning of the collection
         void insertAtBeginning(const T &item) {
-            Node* newNode = new Node(item); //This should work
+            Node* newNode = new Node(item);
             newNode->next = head;
             head = newNode;
             count++;
@@ -160,7 +157,7 @@ namespace csi281 {
             assert(count > 0);
             
             Node* current = head;
-            for (int index = 0; index < count; current = current->next, index++); // Go to second to last item
+            for (int index = 0; index < count; current = current->next, index++);
             delete current; // This line cost me 3 hours :P
             count--;
         }
