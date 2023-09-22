@@ -60,8 +60,9 @@ namespace csi281 {
 
             // Something must be wrong with the delete functions cuz the tail function has garbage in it
             int index = 0;
-            for (Node* current = head; current->next != nullptr /*index < count*/; current = current->next, index++)
+            for (Node* current = head; current->next != nullptr /*index < count - 1*/; current = current->next, index++) {
                 if (current->data == item) return index;
+            }
             return -1;
             
             /*Node* current = head;
@@ -95,20 +96,42 @@ namespace csi281 {
         
         // Insert at the end of the collection
         void insertAtEnd(const T &item) {
+            Node* newNode = new Node(item);
+            newNode->next = nullptr;
+            
             // If linked list is empty
             if (count == 0) {
-                Node* insert = new Node(item);
-                head = insert;
-                tail = insert;
+                head = newNode;
+                tail = newNode;
                 count++;
                 return;
             }
 
-            Node* newNode = new Node(item); 
-            Node* lastNode = tail;
+            // If it's the only Node
+            if (head == nullptr) {
+                head = newNode;
+                count++;
+                return;
+            }
 
+            // If neither empty nor alone
+            /*Node* cursor;
+            for (cursor = head; cursor->next != nullptr; cursor = cursor->next);
+            cursor->next = newNode;
+            tail = newNode;*/
+
+
+            /*tail->next = newNode;
+            Node* cursor = tail;
+            cursor->next = new Node(item);
+            tail = cursor->next;
+            tail->next = nullptr;*/
+
+            //Node* newNode = new Node(item); 
+            Node* lastNode = tail;
             tail = newNode;
             lastNode->next = tail;
+
             count++;
         }
         
@@ -153,10 +176,10 @@ namespace csi281 {
             assert(count > 0);
             
             Node* current = head;
-            for (int index = 0; index < count - 1; current = current->next, index++);
-            // current is the second to last
+            for (int index = 0; index < count - 1; current = current->next, index++); // Go to second to last item
             delete tail;
             tail = current;
+            tail->next = nullptr;
             count--;
         }
         

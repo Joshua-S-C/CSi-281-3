@@ -1,4 +1,4 @@
-//
+//  Joshua Sinclair Chong
 //  DynamicArray.h
 //
 //  This file defines a Dynamic Array class.

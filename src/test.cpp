@@ -1,4 +1,4 @@
-//
+//  Joshua Sinclair Chong
 //  test.cpp
 //
 //  Tests to prove your code works.
@@ -52,7 +52,7 @@ TEST_CASE( "Linked List", "[LL]" ) {
         }
         CHECK( ll.getCount() == 6 );
         CHECK( ll.get(2) == 11 );
-//        CHECK( ll.find(7) == 4 );
+        CHECK( ll.find(7) == 4 );
         ll.removeAtBeginning();
         CHECK( ll.get(0) == 4 );
         CHECK( ll.getCount() == 5 );
@@ -69,8 +69,7 @@ TEST_CASE( "Linked List", "[LL]" ) {
         CHECK( ll.get(0) == 4 );
         CHECK( ll.contains(50) == true );   
         ll.remove(50);
-// Breaking somewhere below
-//        CHECK( ll.contains(50) == false );
+        CHECK( ll.contains(50) == false );  // Breaking here because find goes past where it should be
         CHECK( ll.getCount() == 103 );
         ll.insertAtBeginning(1023);
         ll.insertAtBeginning(4324);
@@ -80,7 +79,7 @@ TEST_CASE( "Linked List", "[LL]" ) {
         CHECK( ll.get(0) == 4324 );
     }
     
-    /*
+    
     SECTION( "string test" ) {
         LinkedList<string> ll = LinkedList<string>();
         string sampleStringArray1[6] = {"hi", "b", "d", "wo", "t", "e"};
@@ -151,130 +150,129 @@ TEST_CASE( "Linked List", "[LL]" ) {
         CHECK( ll.getCount() == 101 );
         CHECK( ll.get(0) == Person("Sarah", 33) );
     }
-    */
 }
 
-//TEST_CASE( "Dynamic Array", "[DA]" ) {
-//    SECTION( "int Test" ) {
-//        DynamicArray<int> da = DynamicArray<int>();
-//        int sampleIntArray1[6] = {23, 4, 11, 4, 7, 8};
-//        for (int &i : sampleIntArray1) {
-//            da.insertAtEnd(i);
-//        }
-//        CHECK( da.getCount() == 6 );
-//        CHECK( da.get(2) == 11 );
-//        CHECK( da.find(7) == 4 );
-//        da.removeAtBeginning();
-//        CHECK( da.get(0) == 4 );
-//        CHECK( da.getCount() == 5 );
-//        for (int i = 0; i < 100; i++) {
-//            da.insert(i, 3);
-//        }
-//        CHECK( da.get(1) == 11 );
-//        CHECK( da.get(3) == 99 );
-//        CHECK( da.get(102) == 0 );
-//        CHECK( da.getCount() == 105 );
-//        da.removeAtEnd();
-//        CHECK( da.getCount() == 104 );
-//        CHECK( da.get(103) == 7 );
-//        CHECK( da.get(0) == 4 );
-//        CHECK( da.contains(50) == true );
-//        da.remove(50);
-//        CHECK( da.contains(50) == false );
-//        CHECK( da.getCount() == 103 );
-//        da.insertAtBeginning(1023);
-//        da.insertAtBeginning(4324);
-//        CHECK( da.contains(4678) == false );
-//        CHECK( da.contains(1023) == true );
-//        CHECK( da.getCount() == 105 );
-//        CHECK( da.get(0) == 4324 );
-//    }
-//    
-//    SECTION( "string test" ) {
-//        LinkedList<string> da = LinkedList<string>();
-//        string sampleStringArray1[6] = {"hi", "b", "d", "wo", "t", "e"};
-//        for (string &s : sampleStringArray1) {
-//            da.insertAtEnd(s);
-//        }
-//        CHECK( da.getCount() == 6 );
-//        CHECK( da.get(2) == "d" );
-//        CHECK( da.find("t") == 4 );
-//        da.removeAtBeginning();
-//        CHECK( da.get(0) == "b" );
-//        CHECK( da.getCount() == 5 );
-//        for (int i = 0; i < 100; i++) {
-//            da.insert(string(i, 'A'), 3);
-//        }
-//        CHECK( da.get(1) == "d" );
-//        CHECK( da.get(3) == string(99, 'A') );
-//        CHECK( da.get(102) == "" );
-//        CHECK( da.getCount() == 105 );
-//        da.removeAtEnd();
-//        CHECK( da.getCount() == 104 );
-//        CHECK( da.get(103) == "t" );
-//        CHECK( da.get(0) == "b" );
-//        CHECK( da.contains("AAAA") == true );
-//        da.remove("AAAAAAA");
-//        CHECK( da.contains("AAAAAAA") == false );
-//        CHECK( da.getCount() == 103 );
-//        da.insertAtBeginning("Bob");
-//        da.insertAtBeginning("Mary");
-//        CHECK( da.contains("Sanford") == false );
-//        CHECK( da.contains("Bob") == true );
-//        CHECK( da.getCount() == 105 );
-//        CHECK( da.get(0) == "Mary" );
-//    }
-//    
-//    SECTION( "Person test" ) {
-//        LinkedList<Person> da = LinkedList<Person>();
-//        Person samplePersonArray1[2] = {Person("Drew", 65), Person("Ellen", 66)};
-//        for (Person &p : samplePersonArray1) {
-//            da.insertAtEnd(p);
-//        }
-//        CHECK( da.getCount() == 2 );
-//        CHECK( da.get(1).age == 66 );
-//        CHECK( da.find(Person("Drew", 65)) == 0 );
-//        da.removeAtBeginning();
-//        CHECK( da.get(0) == Person("Ellen", 66) );
-//        CHECK( da.getCount() == 1 );
-//        for (int i = 0; i < 100; i++) {
-//            da.insert(Person("Clone", 18), 1);
-//        }
-//        CHECK( da.get(1).name == "Clone" );
-//        CHECK( da.get(3) == Person("Clone", 18) );
-//        CHECK( da.get(100) == Person("Clone", 18) );
-//        CHECK( da.getCount() == 101 );
-//        da.removeAtEnd();
-//        CHECK( da.getCount() == 100 );
-//        CHECK( da.get(99) == Person("Clone", 18) );
-//        CHECK( da.get(0) == Person("Ellen", 66) );
-//        CHECK( da.contains(Person("Ellen", 66)) == true );
-//        CHECK( da.contains(Person("Clone", 18)) == true );
-//        da.remove(Person("Ellen", 66));
-//        CHECK( da.contains(Person("Ellen", 66)) == false );
-//        CHECK( da.getCount() == 99 );
-//        da.insertAtBeginning(Person("Matteo", 23));
-//        da.insertAtBeginning(Person("Sarah", 33));
-//        CHECK( da.contains(Person("Drew", 65)) == false );
-//        CHECK( da.contains(Person("Matteo", 23)) == true );
-//        CHECK( da.getCount() == 101 );
-//        CHECK( da.get(0) == Person("Sarah", 33) );
-//    }
-//    
-//    SECTION("capacity test") {
-//        DynamicArray<int> da = DynamicArray<int>(5);
-//        CHECK ( da.getCapacity() == 5 );
-//        for (int i = 0; i < 10; i++) {
-//            da.insertAtEnd(i);
-//        }
-//        CHECK ( da.getCapacity() == 10 );
-//        da.insertAtEnd(10);
-//        CHECK ( da.getCapacity() == 20 );
-//        da.setCapacity(3);
-//        CHECK ( da.getCapacity() == 3 );
-//        CHECK ( da.getCount() == 3 );
-//        CHECK ( da[2] == 2 );
-//    }
-//}
+TEST_CASE( "Dynamic Array", "[DA]" ) {
+    SECTION( "int Test" ) {
+        DynamicArray<int> da = DynamicArray<int>();
+        int sampleIntArray1[6] = {23, 4, 11, 4, 7, 8};
+        for (int &i : sampleIntArray1) {
+            da.insertAtEnd(i);
+        }
+        CHECK( da.getCount() == 6 );
+        CHECK( da.get(2) == 11 );
+        CHECK( da.find(7) == 4 );
+        da.removeAtBeginning();
+        CHECK( da.get(0) == 4 );
+        CHECK( da.getCount() == 5 );
+        for (int i = 0; i < 100; i++) {
+            da.insert(i, 3);
+        }
+        CHECK( da.get(1) == 11 );
+        CHECK( da.get(3) == 99 );
+        CHECK( da.get(102) == 0 );
+        CHECK( da.getCount() == 105 );
+        da.removeAtEnd();
+        CHECK( da.getCount() == 104 );
+        CHECK( da.get(103) == 7 );
+        CHECK( da.get(0) == 4 );
+        CHECK( da.contains(50) == true );
+        da.remove(50);
+        CHECK( da.contains(50) == false );
+        CHECK( da.getCount() == 103 );
+        da.insertAtBeginning(1023);
+        da.insertAtBeginning(4324);
+        CHECK( da.contains(4678) == false );
+        CHECK( da.contains(1023) == true );
+        CHECK( da.getCount() == 105 );
+        CHECK( da.get(0) == 4324 );
+    }
+    
+    SECTION( "string test" ) {
+        LinkedList<string> da = LinkedList<string>();
+        string sampleStringArray1[6] = {"hi", "b", "d", "wo", "t", "e"};
+        for (string &s : sampleStringArray1) {
+            da.insertAtEnd(s);
+        }
+        CHECK( da.getCount() == 6 );
+        CHECK( da.get(2) == "d" );
+        CHECK( da.find("t") == 4 );
+        da.removeAtBeginning();
+        CHECK( da.get(0) == "b" );
+        CHECK( da.getCount() == 5 );
+        for (int i = 0; i < 100; i++) {
+            da.insert(string(i, 'A'), 3);
+        }
+        CHECK( da.get(1) == "d" );
+        CHECK( da.get(3) == string(99, 'A') );
+        CHECK( da.get(102) == "" );
+        CHECK( da.getCount() == 105 );
+        da.removeAtEnd();
+        CHECK( da.getCount() == 104 );
+        CHECK( da.get(103) == "t" );
+        CHECK( da.get(0) == "b" );
+        CHECK( da.contains("AAAA") == true );
+        da.remove("AAAAAAA");
+        CHECK( da.contains("AAAAAAA") == false );
+        CHECK( da.getCount() == 103 );
+        da.insertAtBeginning("Bob");
+        da.insertAtBeginning("Mary");
+        CHECK( da.contains("Sanford") == false );
+        CHECK( da.contains("Bob") == true );
+        CHECK( da.getCount() == 105 );
+        CHECK( da.get(0) == "Mary" );
+    }
+    
+    SECTION( "Person test" ) {
+        LinkedList<Person> da = LinkedList<Person>();
+        Person samplePersonArray1[2] = {Person("Drew", 65), Person("Ellen", 66)};
+        for (Person &p : samplePersonArray1) {
+            da.insertAtEnd(p);
+        }
+        CHECK( da.getCount() == 2 );
+        CHECK( da.get(1).age == 66 );
+        CHECK( da.find(Person("Drew", 65)) == 0 );
+        da.removeAtBeginning();
+        CHECK( da.get(0) == Person("Ellen", 66) );
+        CHECK( da.getCount() == 1 );
+        for (int i = 0; i < 100; i++) {
+            da.insert(Person("Clone", 18), 1);
+        }
+        CHECK( da.get(1).name == "Clone" );
+        CHECK( da.get(3) == Person("Clone", 18) );
+        CHECK( da.get(100) == Person("Clone", 18) );
+        CHECK( da.getCount() == 101 );
+        da.removeAtEnd();
+        CHECK( da.getCount() == 100 );
+        CHECK( da.get(99) == Person("Clone", 18) );
+        CHECK( da.get(0) == Person("Ellen", 66) );
+        CHECK( da.contains(Person("Ellen", 66)) == true );
+        CHECK( da.contains(Person("Clone", 18)) == true );
+        da.remove(Person("Ellen", 66));
+        CHECK( da.contains(Person("Ellen", 66)) == false );
+        CHECK( da.getCount() == 99 );
+        da.insertAtBeginning(Person("Matteo", 23));
+        da.insertAtBeginning(Person("Sarah", 33));
+        CHECK( da.contains(Person("Drew", 65)) == false );
+        CHECK( da.contains(Person("Matteo", 23)) == true );
+        CHECK( da.getCount() == 101 );
+        CHECK( da.get(0) == Person("Sarah", 33) );
+    }
+    
+    SECTION("capacity test") {
+        DynamicArray<int> da = DynamicArray<int>(5);
+        CHECK ( da.getCapacity() == 5 );
+        for (int i = 0; i < 10; i++) {
+            da.insertAtEnd(i);
+        }
+        CHECK ( da.getCapacity() == 10 );
+        da.insertAtEnd(10);
+        CHECK ( da.getCapacity() == 20 );
+        da.setCapacity(3);
+        CHECK ( da.getCapacity() == 3 );
+        CHECK ( da.getCount() == 3 );
+        CHECK ( da[2] == 2 );
+    }
+}
 
 
