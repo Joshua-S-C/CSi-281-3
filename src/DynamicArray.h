@@ -112,14 +112,23 @@ namespace csi281 {
         
         // Remove the item at the beginning of the collection
         void removeAtBeginning() {
-            for (int i = 0; i < count - 1; i++)
-                backingStore[i] = backingStore[i + 1];
+            //for (int i = 0; i < count - 1; i++)
+            //    backingStore[i] = backingStore[i + 1];
+
+            T* newArr = new T[capacity];
+            copy(backingStore + 1, backingStore + count, newArr);
+            delete[] backingStore;
+            backingStore = newArr;
             count--;
         }
         
         // Remove the item at the end of the collection
         // Hint: This might be very simple.
         void removeAtEnd() {
+            T* newArr = new T[count];
+            copy(backingStore, backingStore + count-1, newArr);
+            delete[] backingStore;
+            backingStore = newArr;
             count--;
         }
         
@@ -137,9 +146,14 @@ namespace csi281 {
                 return;
             }
 
-            for (int i = index; i < count; i++)
-                backingStore[i] = backingStore[i + 1];
-            
+            //for (int i = index; i < count; i++)
+            //    backingStore[i] = backingStore[i + 1];
+
+            T* newArr = new T[capacity];
+            copy(backingStore, backingStore + index, newArr);
+            copy(backingStore + index + 1, backingStore + count, newArr + index);
+            delete[] backingStore;
+            backingStore = newArr;
             count--;
         }
         
