@@ -94,22 +94,26 @@ namespace csi281 {
         void insert(const T &item, int index) {
             if (count >= capacity)
                 setCapacity(capacity * growthFactor); 
+
+            if (index == 0) {
+                insertAtBeginning(item);
+                return;
+            }
+
+            if (index == count) {
+                insertAtEnd(item);
+                return;
+            }
+
             moveDownFrom(index);
-            backingStore[index];
+            backingStore[index] = item;
             count++;
         }
         
         // Remove the item at the beginning of the collection
         void removeAtBeginning() {
-            T* newArr = new T[count - 1];
-
-            //for (int i = 0; i < count - 1; i++)
-                //newArr[i] = backingStore[i + 1];
-
-            copy(backingStore + 1, backingStore + count, newArr);
-
-            delete[] backingStore;
-            backingStore = newArr;
+            for (int i = 0; i < count - 1; i++)
+                backingStore[i] = backingStore[i + 1];
             count--;
         }
         
@@ -117,27 +121,25 @@ namespace csi281 {
         // Hint: This might be very simple.
         void removeAtEnd() {
             count--;
-            T* newArr = new T[count];
-
-            //for (int i = 0; i < count - 1; i++)
-                //newArr[i] = backingStore[i];
-
-            copy(backingStore, backingStore + count, newArr);
-
-            delete[] backingStore;
-            backingStore = newArr;
         }
         
         // Remove the item at a specific index
         // Hint: Can be done by a combination of moving items
         // down and removing the starting beginning element
         void removeAt(int index) {
-            T* newArr = new T[count - 1];
+            if (index == 0) {
+                removeAtBeginning();
+                return;
+            }
 
-            copy(backingStore, backingStore + index, newArr);
-            copy(backingStore + index + 1, backingStore + count, newArr + index);
-            delete[] backingStore;
-            backingStore = newArr;
+            if (index == count) {
+                removeAtEnd();
+                return;
+            }
+
+            for (int i = index; i < count; i++)
+                backingStore[i] = backingStore[i + 1];
+            
             count--;
         }
         
